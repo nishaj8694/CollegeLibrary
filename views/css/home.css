@@ -1,0 +1,97 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100vh;
+    width: 100%;
+    background-image: url('../Picture/pexels-pixabay-207732.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+h2{
+    color: rgb(255 255 255);
+    mix-blend-mode: color-dodge;
+    font-size: 45px;
+    margin-inline: 100px;
+    transform: translateY(50%);
+}
+
+.home{
+    /* position: absolute; */
+    /* left: 20px; */
+    /* top: 50%; */
+    /* display: block; */
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1500px;
+}
+
+.bodydiv {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.bodydiv > div {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background-color: bisque;
+    border: 2px solid black;
+    font-size: 24px;
+}
+
+
+.bodydiv > .back {
+    background-color: rgba(63, 63, 63,);
+    transform:translateZ(-80px) rotateY(210deg);
+     /* translateZ(-75px) rotateY(180deg); */
+    /* opacity: 0.8; */
+    border-radius: 2px;
+    background-image: url('../Picture/bookPage.jpeg');
+    background-size: cover;
+    background-position: center;
+
+}
+
+.bodydiv > .left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    background-color: rgb(74, 73, 73);
+    transform:rotateY(-26deg) translateZ(14px) scale(1,1.1);
+    box-shadow: rgba(255, 253, 253, 0.16) 0px 1px 4px;
+    border-radius: 5px;
+    background-image: url('../Picture/library.jpeg');
+    background-size: cover;
+    background-position:bottom;
+    background-repeat: no-repeat;
+    filter:blur();
+    transition: transform .5s ease-in;
+
+
+  }
+  .bodydiv > .left>a {
+    text-decoration: none;
+    color: aliceblue;
+    mix-blend-mode:difference;
+    font-size: xx-large;
+  }
+
+  .bodydiv > .left:hover{
+    transform:rotateY(-54deg) translateZ(35px) scale(1,1.1)
+
+  }
+

@@ -1,0 +1,131 @@
+<%- include('./part1.ejs') %>
+<style>
+    #dataContent{
+        padding-bottom: 10px;
+        height: 100vh;
+        overflow:auto;
+        scrollbar-width: thin;
+        scrollbar-color: transparent rgba(255, 250, 250, 0.1);
+        scroll-behavior: smooth;
+    }
+    p{
+        margin: 0;
+        padding: 0;
+    }
+    p>span{
+        float: right;
+    }
+    tr>td:first-child{
+    font-weight:bold;
+    }
+    tr>td:last-child{
+    float: right;
+    text-align: end;
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script> 
+
+      document.addEventListener('DOMContentLoaded', function() {
+
+        document.querySelectorAll('.updateButton').forEach(function(button) {
+            button.addEventListener('click', async function() {
+                try {
+                    const id = this.dataset.bookId;;
+                    Swal.fire({
+                        title:'Delete Product',
+                        text: `Conform your action. once deleted it wont'be recever !`,
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: 'delete',
+                        cancelButtonText: 'Cancel',
+                    })
+                    .then((willDelete) => {
+                        if (willDelete.isConfirmed) {
+                            fetch(`http://localhost:3001/dashboard/Product/${id}`, {
+                                    method: 'DELETE'
+                            })
+                            .then((responce)=>{
+                                if (responce.status==204){
+                                    Swal.fire("success!") 
+                                    setTimeout(() => {
+                                        window.location.href=`http://localhost:3001/dashboard/Product`    
+                                    }, 3000);
+                                       
+                                }
+                                else(
+                                    Swal.fire("faildone")
+                                )
+                            } )
+                           .catch(Swal.fire("faild"))
+                            
+                        } else {
+                            Swal.fire("Your Book not make any changes!",{
+                                icon:'error'
+                            });
+                        }
+                    })
+                } catch (error) {
+                    console.error('Error updating subscription:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Failed to update subscription. Please try again later.'
+                    });
+                }
+            });
+        });
+    });
+</script>
+<div class="d-flex align-items-start flex-wrap  gap-1 mt-2 w-100 " id="dataContent">
+    <% data.forEach(book => { %>
+      <div class="card" style="width: 17rem;">
+        <img src="<%= book.Image%>" alt="<%= book.Image%>" class="card-img-top" height="150px">
+         <table class="mx-2" >
+                <thead>
+                    <h5 class="mx-2"><%= book.Book %></h5>
+                </thead>
+            <tbody>
+                <tr>
+                    <td>Auther</td>
+                    <td><%= book.Auther %></td>
+                </tr>
+                <tr>
+                    <td>Pages</td>
+                    <td><%= book.Page %></td>
+                </tr>
+                <tr>
+                    <td>Department</td>
+                    <td><%= book.Department %></td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td><%= book.Subscribe  === false ? "Free" : "Booked" %></td>
+                </tr>
+            </tbody>
+         </table>
+         <div class="d-flex m-0 p-0 w-100">
+            <div class="w-50 d-flex justify-content-center py-1 bg-light updateButton" 
+            style="border-bottom-left-radius: 5px; color: red;" data-book-id="<%= book._id %>">DELETE</div>
+            <div class="w-50 d-flex justify-content-center bg-light py-1 rounded-right deleteButton"
+             style="border-bottom-right-radius: 5px; color: rgb(118, 99, 3);" 
+             ><a href="/dashboard/Product/<%= book._id %>" style="text-decoration: none;">UPDATE</a></div>
+
+         </div>
+           <!-- <ul class="list-group list-group-flush">
+             <li class="list-group-item bg-transparent">
+                <h5 class="card-title cardTexted"><%= book.Book %></h5>
+               <p><b>Auther</b><span><%= book.Auther %><span</p>
+               <p><b>Pages</b><span><%= book.Page %></span></p>
+               <p><b>Department</b><span><%= book.Department %></span></p>
+               <% if (book.Subscribe ===false ){ %>
+                <p><b>status</b><span>Subscribe</span></p>
+               <% } else{ %>
+                <p><b>status</b><span>unavailable</span></p> 
+             <% } %>
+             </li>
+           </ul> -->
+         </div>  
+       <% }); %>
+  </div>  
+<%- include('./part2.ejs') %>

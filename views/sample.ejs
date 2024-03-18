@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1500px;
+        }
+
+        .bodydiv {
+            width: 250px;
+            height: 250px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: example 12s linear infinite;
+        }
+
+        @keyframes example {
+            0% { transform: rotateX(0deg); }
+            25% { transform: rotateZ(90deg); }
+            50% { transform: rotateY(180deg); }
+            75% { transform: rotateX(270deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        .bodydiv > div {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background-color: bisque;
+            border: 2px solid black;
+            text-align: center;
+            line-height: 250px;
+            font-size: 24px;
+        }
+
+        .bodydiv > .front {
+            transform: translateZ(125px);
+            background-color: rgb(73, 73, 72);
+        }
+
+        .bodydiv > .back {
+            background-color: rgb(45, 38, 29);
+            transform: translateZ(-125px) rotateY(180deg);
+        }
+
+        .bodydiv > .left {
+            background-color: rgb(78, 36, 82);
+            transform: rotateY(-90deg) translateZ(125px);
+        }
+
+        .bodydiv > .right {
+            background-color: rgb(55, 121, 109);
+            transform: rotateY(90deg) translateZ(125px);
+        }
+        .bodydiv > .top {
+            background-color: rgb(158, 207, 95);
+            transform: rotateX(90deg) translateZ(125px);
+        }
+
+        .bodydiv > .bottom {
+            background-color: rgb(115, 43, 66);
+            transform: rotateX(-90deg) translateZ(125px);
+        }
+    </style>
+</head>
+<body>
+    <div class="bodydiv">
+        <div class="front">Front</div>
+        <div class="back">Back</div>
+        <div class="left">Left</div> 
+        <div class="right">Right</div>
+        <div class="top">top</div>
+        <div class="bottom">bottom</div> 
+
+    </div>
+</body>
+</html>

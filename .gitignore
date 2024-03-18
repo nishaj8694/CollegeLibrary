@@ -1,0 +1,22 @@
+# Dependency directories
+node_modules/
+
+# Generated files
+npm-debug.log
+yarn-error.log
+.env
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Optional: Logs and other generated files
+logs/
+*.log
+
+# Optional: Configuration files that might include sensitive information
+config/*.json
